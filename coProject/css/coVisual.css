@@ -1,0 +1,230 @@
+.linkBtn {
+    display: inline-block;
+    height: 35px;
+    padding: 8px;
+    vertical-align: center;
+    box-shadow: 0 0 2px #ddd;
+    border-radius: 8px;
+    background-color: #a1a5a475;
+    color: #fff;
+    margin-left: 15px;
+}
+
+.linkBtn.active {
+    background-color: #2bbbad;
+}
+
+a:hover {
+    background-color:#1fa799;
+    color: #fff;
+}
+
+.btnGroup {
+    margin-bottom: 23px;
+}
+
+.videoBox{
+    width: 98%;
+	height: 350px;
+    box-shadow: 0px 0px 4px #e6e3e3b5;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+
+.imglistBox {
+    text-align: center;
+    width: 98%;
+}
+
+.imglistBox li {
+    display: inline-block;
+    width: 100px;
+    height: 175px;
+    margin-right: 8px;
+    vertical-align: top;
+    overflow: hidden;
+
+}
+
+.imglistBox img {
+    /*width: 100%;*/
+    height: 140px;
+    margin: 0 auto;
+    /*border: 1px solid #2bbbad;*/
+
+}
+
+.nameInfo {
+    text-align: center;
+}
+
+.deviceBox{
+    text-align: center;
+    width: 98%;
+}
+
+.deviceBox li {
+    display: inline-block;
+    margin-right: 18px; 
+    margin-top: 25px;
+}
+
+
+.deviceBox li:last-child{
+    margin-right: 0px;
+}
+
+.deviceBox li p {
+    text-align: center;
+}
+
+
+/* 协同场景信息可视化 coInfo css */
+
+.mainContent {
+    width: 70%;
+    margin: 0px auto;
+}
+
+.coordinate {
+    position: absolute;
+    left: -50px;
+    top: 0px;
+    width: 100%;
+
+}
+
+.y-coordinate{
+    position: relative;
+    padding-top: 50px;
+}
+
+
+.y-zhou {
+    width: 10px;
+    height: 480px;
+    background-color: #749f83;
+}
+
+.y-content{
+    position: absolute;
+    top: 50px;
+    left: -20px;   
+    padding-top: 23px; 
+
+ /*   -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;*/
+}
+
+.y-content li {
+    width: 50px;
+    height: 30px;
+    background-color: #749f83;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    box-shadow: 0 0 2px #ddd;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 18px;
+    cursor: pointer;
+  /*  
+   -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;*/
+
+}
+
+.y-content li.active {
+    background-color: #FFC000;
+}
+
+.y-content li:hover {
+    background-color: #eab61a;;
+}
+
+.x-coordinate {
+    position: absolute;
+    bottom: -30px;
+    left: -15px;
+    width: 100%;
+}
+
+input[type=range].timeInput {
+    border: none;
+   /* width: 80%;
+    display: inline-block;*/
+     -webkit-appearance: none;
+    /*max-width: 350px;*/
+    height: 10px;
+    background: #A7B7CC;
+    outline: none;
+    margin-bottom: 30px
+}
+
+
+ 
+.timeInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #A7B7CC;
+    box-shadow: 0 0px 2px rgba(0,0,0,.8);
+    border:1px solid #eee;
+    cursor: pointer;
+}
+
+.timeInput::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    cursor: pointer;
+}
+
+.timeGroup {
+    display: inline-block;
+}
+
+.timeGroup span{
+    padding: 5px;
+    background-color: #A7B7CC;
+    color: #000;
+}
+
+.relationship {
+    position: relative;
+}
+
+.addition {
+    position: absolute;
+    top: 2px;
+    left: 195px;
+}
+
+.colorIcon {
+    display: inline-block;
+    width: 26px;
+    height: 15px;
+    background-color: #749f83;
+    border-radius: 3px;
+}
+
+.colorIcon_t {
+
+    background-color: #A7B7CC;
+}
+
+.textIcon {
+    margin-right: 5px;
+    vertical-align: text-bottom;
+    color: #333;
+}

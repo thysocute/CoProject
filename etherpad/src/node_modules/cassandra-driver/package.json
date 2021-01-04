@@ -1,0 +1,75 @@
+{
+  "_args": [
+    [
+      "cassandra-driver@2.0.1",
+      "/tmp/tmp.L6m6kMGm2M/src"
+    ]
+  ],
+  "_from": "cassandra-driver@2.0.1",
+  "_id": "cassandra-driver@2.0.1",
+  "_inBundle": false,
+  "_integrity": "sha1-BydZq4N2KNy8tbxngoPcySLHZ+I=",
+  "_location": "/cassandra-driver",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "cassandra-driver@2.0.1",
+    "name": "cassandra-driver",
+    "escapedName": "cassandra-driver",
+    "rawSpec": "2.0.1",
+    "saveSpec": null,
+    "fetchSpec": "2.0.1"
+  },
+  "_requiredBy": [
+    "/ueberdb2"
+  ],
+  "_resolved": "https://registry.npmjs.org/cassandra-driver/-/cassandra-driver-2.0.1.tgz",
+  "_spec": "2.0.1",
+  "_where": "/tmp/tmp.L6m6kMGm2M/src",
+  "author": {
+    "name": "DataStax"
+  },
+  "bugs": {
+    "url": "https://github.com/datastax/nodejs-driver/issues"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "long": "^2.2.0"
+  },
+  "description": "DataStax Node.js Driver for Apache Cassandra",
+  "devDependencies": {
+    "mocha": ">= 1.14.0",
+    "rewire": ">= 2.1.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "homepage": "https://github.com/datastax/nodejs-driver#readme",
+  "keywords": [
+    "cassandra",
+    "cql",
+    "cql3",
+    "connection",
+    "pool",
+    "datastax",
+    "nosql",
+    "driver",
+    "database"
+  ],
+  "licenses": [
+    {
+      "type": "Apache License, Version 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "name": "cassandra-driver",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datastax/nodejs-driver.git"
+  },
+  "scripts": {
+    "test": "mocha test/unit -R spec -t 5000"
+  },
+  "version": "2.0.1"
+}

@@ -1,0 +1,52 @@
+<?php
+/* Called by addTak.php
+ * Summary: This file queries the database for the pro_name.
+ * If the query is successful, the page is redirected to TaskList.php.
+ * Otherwise the page is redirected to createTak.php.
+ */
+session_start();
+require_once '../includes/databaseConnection.php';
+
+// 如果提交内容不为空
+if (!empty($_POST)) {
+    $pname = $_POST['pname'];     // 任务名称
+    // $password = $_POST['password'];
+    // $error;
+
+    if (empty($pname)) {
+        echo "请填写任务名称！";
+        exit();
+    } else {
+         try {
+                $pdo->beginTransaction();
+                // project表
+                $sql = "INSERT INTO project(pro_name) VALUES(:pname);";
+                $statement = $pdo->prepare($sql);
+                $statement->bindParam(":pname", $pname);
+                $statement->execute();
+
+                $proId = $pdo->lastInsertId();
+
+                // 用户id
+                $sql = "SELECT user_id FROM users WHERE account= '".$_SESSION["account"]."'";
+                $uId = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC)["user_id"];
+
+                // user_pro表
+                $statement = $pdo->prepare("INSERT INTO user_pro(pro_id, user_id) VALUES(:proId, :uId);");
+                $statement->bindParam(":proId", $proId);
+                $statement->bindParam(":uId", $uId);
+                $statement->execute();
+
+                // 提交事务
+                $pdo->commit();
+
+                // header() 函数向客户端发送原始的 HTTP 报头。
+                header('Location: ../static/taskList.php');
+            } catch (PDOException $e) {
+                $pdo->rollback();
+                echo "Error $e";
+            }
+
+    }
+}
+?>

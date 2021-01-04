@@ -1,0 +1,45 @@
+{
+  "_args": [
+    [
+      "dirty@0.9.9",
+      "/tmp/tmp.L6m6kMGm2M/src"
+    ]
+  ],
+  "_from": "dirty@0.9.9",
+  "_id": "dirty@0.9.9",
+  "_inBundle": false,
+  "_integrity": "sha1-94WATEz3kHIgyxD6V2siMp/tpUU=",
+  "_location": "/dirty",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "dirty@0.9.9",
+    "name": "dirty",
+    "escapedName": "dirty",
+    "rawSpec": "0.9.9",
+    "saveSpec": null,
+    "fetchSpec": "0.9.9"
+  },
+  "_requiredBy": [
+    "/ueberdb2"
+  ],
+  "_resolved": "https://registry.npmjs.org/dirty/-/dirty-0.9.9.tgz",
+  "_spec": "0.9.9",
+  "_where": "/tmp/tmp.L6m6kMGm2M/src",
+  "dependencies": {},
+  "description": "A tiny & fast key value store with append-only disk log. Ideal for apps with < 1 million records.",
+  "devDependencies": {
+    "mocha": "~1.8.2",
+    "rimraf": "~2.1.4"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "main": "./lib/dirty",
+  "name": "dirty",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/test-*.js -R list"
+  },
+  "version": "0.9.9"
+}

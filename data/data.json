@@ -1,0 +1,17 @@
+{"data":[
+	{"category":0,"name":"task", "msg":"图像感知会议"},
+	{"category":1,"name":"用户1","msg":"在线"}, 
+	{"category":1,"name":"用户2","msg":"在线"}, 
+	{"category":1,"name":"用户3","msg":"在线"},
+	{"category":2,"name":"phone huawei p10","msg":"不在线"}, 
+	{"category":2,"name":"labtop HUAWEI MateBook X","msg":"在线"}
+],
+"links":[ 
+	{"source":"task"},
+	{"source":"task","target":"用户1","value":"成员"}, 
+	{"source":"task","target":"用户2","value":"成员"}, 
+	{"source":"用户1","target":"phone huawei p10","value":"设备"}, 
+	{"source":"用户2","target":"labtop HUAWEI MateBook X","value":"设备"}
+
+
+]}

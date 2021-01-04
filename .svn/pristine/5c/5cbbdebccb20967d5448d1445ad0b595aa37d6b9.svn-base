@@ -1,0 +1,54 @@
+<?php
+	require_once('../includes/databaseConnection.php');
+	session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<?php include "../includes/head-meta-data.inc.php"; ?>
+ 	<link rel='stylesheet' href='../css/index.css' />
+ 	<link rel="stylesheet" type="text/css" href="../css/createTask.css">
+</head>
+<body>
+<header>
+    <div>
+      <!-- Navigation Bar -->
+      <?php include "../includes/navigation-bar.inc.php"; ?>
+      <!-- End of Navigation Bar -->
+    </div>
+</header>
+<div class="container">
+	<div class="row">
+		<!-- 侧边栏 section-->
+		<div class="col s12 m3">
+			<?php include "../includes/index-left-menu.inc.php"; ?>
+		</div><!-- 组员 section end -->
+		
+		<!-- 关系图展示 -->
+		<div class="col s12 m9">
+			<div class="container">
+			    <h5>新建任务</h5>
+			    <hr/>
+			    <div class='rows'>
+			        <form role="form" action="../php/addTask.php" method="post">
+			            <div class="form-group">
+			                <label>编号:</label>
+			                <input type="text" class="form-control" name="pid" id="pid" 	placeholder="请输入ID">
+			            </div>
+			            <div class="form-group">
+			                <label>任务名称:</label>
+			                <input type="text" class="form-control"  name="pname" 
+			                	id="pname" placeholder="请输入任务名称">
+			            </div>
+			            <div class="form-group">
+			                <button type="submit" class="btn btn-default">提交</button>
+			            </div>
+			        </form>
+			    </div>
+			</div>
+		</div>
+	</div> <!-- class="row" end -->
+</div> <!-- class="container" end -->
+<!-- <script src="../js/view.js"></script> -->
+</body>
+</html>

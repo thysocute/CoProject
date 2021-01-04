@@ -1,0 +1,44 @@
+<?php
+	require_once('../includes/databaseConnection.php');
+	session_start();
+/**
+ * Created by Qian.
+ * User: 
+ * Date: 2020/4/3
+ * Time: 上午8:20
+ */
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<?php include "../includes/head-meta-data.inc.php"; ?>
+	<!-- <link rel='stylesheet' href='../fullcalendar/fullcalendar.css' /> -->
+ 	<link rel='stylesheet' href='../css/index.css' />
+ 	<script src="../themes/d3js/d3.v5.min.js"></script>
+	<script src="../themes/d3js/d3-dsv.v1.min.js"></script>
+	<script src="../themes/d3js/d3-fetch.v1.min.js"></script>
+</head>
+<body>
+<header>
+    <div>
+      <!-- Navigation Bar -->
+      <?php include "../includes/navigation-bar.inc.php"; ?>
+      <!-- End of Navigation Bar -->
+    </div>
+</header>
+<div class="container">
+	<div class="row">
+		<!-- 侧边栏 section-->
+		<div class="col s12 m3">
+			<?php include "../includes/index-left-menu.inc.php"; ?>
+		</div><!-- 侧边栏 section end -->
+		
+		<!-- 关系图展示 -->
+		<div class="col s12 m9">
+			<div class="right-content"></div>
+		</div>
+	</div> <!-- class="row" end -->
+</div> <!-- class="container" end -->
+<script src="../js/view.js"></script>
+</body>
+</html>

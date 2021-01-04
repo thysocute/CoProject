@@ -1,0 +1,105 @@
+body, html {
+	font-family: 'Quicksand', sans-serif;
+	background-color: white; 
+	/* rgb(0,43,54); */
+	background-size: cover;
+	background-position: center;
+	color: rgb(131,148,150);
+}
+
+.container {
+	width: 96%;
+}
+
+#calendar{
+	/*width:900px;*/
+	margin:0 auto;
+}
+.taxt{
+	width:440px;
+}
+.time{
+	width:100px;
+}
+.sear{
+	width:85px;
+}
+select {
+	width: 200px;
+	display: inline-block;
+}
+.select{
+	width:150px;
+}
+.textarea{
+	width:300px;
+}
+.check{
+	padding:8px;
+}
+.slidertext{
+	padding-top:40px;
+}
+.timepicki{
+	position:relative;
+	z-index: 999;
+}
+#edit{
+	position:relative;
+	width:300px;
+}
+#edittitle{
+	padding-bottom:10px;
+	font-weight: bold;
+	font-size: 18px;
+}
+#edittype{
+	position:absolute;
+	top:5px;
+	right:5px;
+	width:80px;
+}
+
+.ui-state-default {
+	font-family: 'Quicksand', sans-serif;
+	color: white;
+	background-image: unset;
+	background-color: rgb(120,194,173);
+	box-shadow: unset;
+	border: unset;
+}
+
+.ui-state-default:hover {
+	background-color: rgb(94, 170, 149);
+	transition-delay: 5000ms;
+}
+
+/* .fc-prev-button.ui-button .ui-icon {
+	background-image: none !important;
+}
+
+.fc-prev-button.ui-button .ui-icon:after {
+	content: "\2039";
+    font-weight: bold;
+    font-size: 200%;
+    top: -7%;
+}
+.fc-prev-button.ui-button .ui-icon {
+	position: relative;
+} */
+
+
+/*导航栏*/
+#navbar-switch {
+	background-color: rgb(60, 60, 78);
+}
+
+header {
+	/*background-color: rgb(60, 60, 78);*/
+	margin-bottom: 2rem;
+}
+
+
+.datepicker-modal {
+	min-width: 488px;
+}

@@ -1,0 +1,30 @@
+<div class="sideMenu">
+  <h3 class="firstBar">任务管理</h3>
+  <ul class="secondBar" style="display: block;">
+    <li><a href="../static/createTask.php">新建任务</a></li>
+    <li><a href="../static/taskList.php">任务列表</a></li>
+    <!-- <li><a href="#">二级导航</a></li> -->
+  </ul>
+  <h3 class="firstBar">用户管理</h3>
+  <ul class="secondBar" style="display: block;">
+    <li><a href="../static/userList.php">用户列表</a></li>
+    <li><a href="./userequip.php">用户设备</a></li>
+  </ul>
+  <h3 class="firstBar">团队管理</h3>
+  <ul class="secondBar" style="display: block;">
+    <li><a href="../static/myTeamList.php">我的团队</a></li>
+    <li><a href="../static/createTeam.php">创建团队</a></li>
+    <li><a href="../static/joinTeam.php">加入团队</a></li>
+  </ul>
+</div> <!-- class="sideMenu" end-->
+<!-- <script type="text/javascript">
+  $(function(){
+    var fBar = $(".sideMenu .firstBar");  // 一级导航
+    var sBar = $(".sideMenu .secondBar"); // 二级导航
+    fBar.each(function(i){
+        $(this).click(function(){
+            sBar.eq(i).slideToggle("fast");// 点击一级标题，二级导航面板展示或隐藏
+          })
+    });
+  })
+</script> -->

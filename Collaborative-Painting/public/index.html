@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Compiled and minified CSS
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+   Compiled and minified JavaScript -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+  <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+  <link rel="stylesheet" href="static/style.css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Courgette|Gloria+Hallelujah&display=swap" rel="stylesheet"> -->
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+  <title>Collaborative Painting</title>
+  <script type="text/javascript">
+    function myFunction(){
+      $("body").css("width", window.innerWidth);
+      $("#allHeatmapPage").css("width", window.innerWidth);
+      $("body").css("height", window.innerHeight);
+    }
+   
+  </script>
+</head>
+
+<body >
+  <div class="container" style="position: relative;">
+    <div id="pageLayout" class="pageLayout" onresize="myFunction()" >
+      <div id="coPaintPage" style="display: block;">
+        <header>
+          Painting Together
+        </header>
+        <p><b style="color: #2bbbad;">Current User:</b><span id="currentUser"></span></p>
+        <p><b style="color: #2bbbad;">Online Users: </b><span id="onlinecount">0</span></p>
+        <!-- p5 related stuff -->
+        <div class="sketch">
+
+          <span id="sizeval">5</span>
+          <input type="range" name="" class="size" id="size" value="5" min="1" max="30">
+          <!-- <button id="eraser" class="fas fa-paint-brush"></button> -->
+          <div class="color-pallete">
+            <button id="selected-col"
+              class="col jscolor {onFineChange:'updateColor(this)',valueElement:null,value:'C3087B'}"></button>
+            <button id="selected-col"
+              class="col jscolor {onFineChange:'updateColor(this)',valueElement:null,value:'FBC51B'}"></button>
+            <button id="selected-col"
+              class="col jscolor {onFineChange:'updateColor(this)',valueElement:null,value:'0B95BA'}"></button>
+            <button id="selected-col"
+              class="col jscolor {onFineChange:'updateColor(this)',valueElement:null,value:'8BBA2C'}"></button>
+          </div>
+          <div class="canvascontainer"></div>
+        </div>
+
+        <div id="snackbar">Snackbar</div>
+        <div id="pos">sss</div>
+      </div>
+      <div id="allHeatmapPage" style="display: none;width: 100%; height: 900px;"></div>
+      <div id="timeHeatmapPage" style="display: none;"></div>
+      <div id="coLevelPage" style="display: none;"></div>
+      <div id="localPage" style="display: none;"></div>
+    </div>
+    
+    <div class="btn-layout">
+      <ul id="visualMenu" class="visualMenu">
+        <li id="coPaintBtn">Co-Drawing Tool</li>
+        <li id="allHeatmapBtn">Group Traces</li>
+        <!-- <li id="user1HeatmapBtn">user1热力图</li> -->
+        <li id="timeHeatmapBtn">Time Analysis</li>
+        <li id="coLevelBtn">Group Structure</li>
+        <li id="localBtn">Location Analysis</li>
+        <li id="upload">Upload</li>
+      </ul>
+    </div>
+
+
+  </div>
+  <div id="main" width="800px" height="400px"></div>
+  <script src="https://cache.amap.com/lbs/static/es5.min.js"></script>
+  <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=a24fea573d01e422d9a84aa6548a6d41&plugin=AMap.CitySearch"></script>
+  <script src="static/echarts.min.js"></script>
+  <script src="static/jscolor.js"></script>
+  <!-- <script src="static/test.js"></script> -->
+  <script src="static/fbrelated.js" charset="utf-8"></script>
+  <script src="static/heatmap.min.js"></script>
+  
+
+</body>
+
+</html>

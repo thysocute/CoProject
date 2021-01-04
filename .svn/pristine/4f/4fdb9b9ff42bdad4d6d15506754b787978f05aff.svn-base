@@ -1,0 +1,8 @@
+<?php
+	/*die($_SESSION['account']);
+	if (!empty($_SESSION['account'])) {*/
+		header("Location: static/homepage.php");
+	/*}else{
+		header("Location: static/login.php");
+	}*/
+?>

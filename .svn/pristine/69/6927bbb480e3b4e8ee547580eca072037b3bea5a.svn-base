@@ -1,0 +1,53 @@
+<?php
+  //session_start();
+    require_once('../includes/databaseConnection.php'); //Make the connection to the database
+/**
+ * Created by Qian.
+ * User: 
+ * Date: 2020/4/3
+ * Time: 上午8:20
+ */
+
+/*
+* 根据从project表中找到获得所有的project信息
+* */
+///// OBTAIN CALENDAR OF TO THE USER GIVEN
+///
+
+// $calendarGroup = $calendarGroups[0];
+$results = array(); // 日历组的calendar id
+try {
+    // 日历组
+    $sql = "SELECT * FROM project";
+    
+    $stmt = $pdo->query($sql);
+
+    while ($rows = $stmt->fetch()) {
+      $results[] = array(
+                    "pid"    => $rows['pro_id'],
+                    "pname"  => $rows['pro_name']
+      );
+    }
+} catch (PDOException $e) {
+    echo "Error: $e";
+}
+// echo json_encode($results);
+
+// 循环输出列表
+if (!empty($results)) {
+  foreach ($results as $value) {
+    echo '<tr>';
+    echo '  <td>'.$value['pid'].'</td>';
+    echo '  <td>'.$value['pname'].'</td>';
+    echo '  <td>';
+    echo '    <a href="../static/updateTaskList.php?pro_id='.$value['pid'].'&pro_name='.$value['pname'].'">修改</a>';
+    echo '    <a href="../php/deleteTask.php?pro_id='.$value['pid'].'&pro_name='.$value['pname'].'">删除</a>';
+    echo '    <a href="../static/addUser.php?pro_id='.$value['pid'].'&pro_name='.$value['pname'].'">添加成员</a>';
+    echo '  </td>';
+    echo '</tr>';
+  }
+}
+
+
+
+?>

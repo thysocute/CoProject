@@ -1,0 +1,37 @@
+<?php
+    require_once('../includes/databaseConnection.php'); //Make the connection to the database
+
+    $event_id 		= $_POST["id"];
+    $title			= $_POST["title"];
+    $description    = $_POST["description"];
+    $startDate 		= $_POST["start"];
+    $endDate 		= $_POST["end"];
+    $allDay			= $_POST["allDay"];
+    $color			= $_POST["color"];
+    $remark		= $_POST["remark"];
+
+    try {
+        // $stmt->beginTransaction();
+        $stmt = $pdo->prepare("
+			UPDATE calendar_events
+			SET title = :title, description = :description, start_date = :startDate, end_date = :endDate, all_day = :allDay, color = :color, remark = :remark
+			WHERE event_id = (:event_id);
+			");
+
+        $stmt->bindParam(":event_id", $event_id);
+        $stmt->bindParam(":title", $title);
+        $stmt->bindParam(":description", $description);
+        $stmt->bindParam(":startDate", $startDate);
+        $stmt->bindParam(":endDate", $endDate);
+        $stmt->bindParam(":allDay", $allDay);
+        $stmt->bindParam(":color", $color);
+        $stmt->bindParam(":remark", $remark);
+
+        $stmt->execute();
+        echo $allDay;
+        // $stmt->commit();
+    } catch (PDOException $e) {
+        // $stmt->rollback();
+        echo "Erro: $e";
+    }
+    ?>

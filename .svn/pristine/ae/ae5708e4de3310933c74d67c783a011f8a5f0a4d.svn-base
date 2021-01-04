@@ -1,0 +1,52 @@
+<?php
+  //session_start();
+    require_once('../includes/databaseConnection.php'); //Make the connection to the database
+
+/**
+ * Created by Qian.
+ * User: 
+ * Date: 2020/4/3
+ * Time: 上午8:20
+ */
+
+/*
+* 将users表和user_info表合并再查询所有的用户信息
+* */
+///// OBTAIN CALENDAR OF TO THE USER GIVEN
+///
+
+$results = array(); 
+try {
+    // 内联查询
+    $sql = "SELECT * FROM users INNER JOIN user_info ON users.user_id=user_info.user_id";
+    
+    $stmt = $pdo->query($sql);
+
+    while ($rows = $stmt->fetch()) {
+      $results[] = array(
+                    "userId"    => $rows['user_id'],
+                    "account"   => $rows['account'],
+                    "username"  => $rows['username'],
+                    "email"     => $rows['email'],
+                    "phone"     => $rows['phone']
+      );
+    }
+} catch (PDOException $e) {
+    echo "Error: $e";
+}
+// echo json_encode($results);
+
+// 循环输出列表
+if (!empty($results)) {
+  foreach ($results as $value) {
+    echo '<tr>';
+    echo '  <td>'.$value['userId'].'</td>';
+    echo '  <td>'.$value['account'].'</td>';
+    echo '  <td>'.$value['username'].'</td>';
+    echo '  <td>'.$value['email'].'</td>';
+    echo '  <td>'.$value['phone'].'</td>';
+    echo '</tr>';
+  }
+}
+
+?>

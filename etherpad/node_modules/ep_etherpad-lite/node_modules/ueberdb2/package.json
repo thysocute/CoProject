@@ -1,0 +1,99 @@
+{
+  "_args": [
+    [
+      "ueberdb2@0.4.0",
+      "/tmp/tmp.L6m6kMGm2M/src"
+    ]
+  ],
+  "_from": "ueberdb2@0.4.0",
+  "_id": "ueberdb2@0.4.0",
+  "_inBundle": false,
+  "_integrity": "sha512-iY4+J8D+S5OP6dP9bSomJfN7zIZMcsO8h7J+EsxXod+iUpnQXmIIYsb9+Ui1Fz4KFiGbMDSaDP6Ipqz/l/1hmA==",
+  "_location": "/ueberdb2",
+  "_nodeVersion": "0.12.0",
+  "_npmUser": {
+    "name": "johnyma22",
+    "email": "john@mclear.co.uk"
+  },
+  "_npmVersion": "2.5.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "ueberdb2@0.4.0",
+    "name": "ueberdb2",
+    "escapedName": "ueberdb2",
+    "rawSpec": "0.4.0",
+    "saveSpec": null,
+    "fetchSpec": "0.4.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ueberdb2/-/ueberdb2-0.4.0.tgz",
+  "_shasum": "cbebe8b8a0879f4ca970c3d69bd578e291d6e835",
+  "_spec": "0.4.0",
+  "_where": "/tmp/tmp.L6m6kMGm2M/src",
+  "author": {
+    "name": "Etherpad Foundation"
+  },
+  "bugs": {
+    "url": "https://github.com/pita/ueberDB/issues"
+  },
+  "contributors": [
+    {
+      "name": "John McLear"
+    },
+    {
+      "name": "spcsser"
+    },
+    {
+      "name": "Peter Martischka"
+    }
+  ],
+  "dependencies": {
+    "async": "0.1.15",
+    "cassandra-driver": "2.0.1",
+    "channels": "0.0.4",
+    "dirty": "0.9.x",
+    "elasticsearch": "15.1.1",
+    "mysql": "2.15.0",
+    "nano": "^6.2.0",
+    "pg": "~6.1.6",
+    "redis": ">=0.12.1",
+    "rethinkdb": "^2.3.1"
+  },
+  "description": "transform every database into a object key value store",
+  "devDependencies": {
+    "expect.js": "0.3.1",
+    "log4js": "0.6.22",
+    "mocha": "3.2.0",
+    "mongodb": "2.0.25"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "cbebe8b8a0879f4ca970c3d69bd578e291d6e835",
+    "tarball": "http://registry.npmjs.org/ueberdb2/-/ueberdb2-0.3.0.tgz"
+  },
+  "gitHead": "00cb8c896433922111c12fe9d2a45087fdb11d59",
+  "homepage": "https://github.com/pita/ueberDB",
+  "keywords": [
+    "database",
+    "keyvalue"
+  ],
+  "main": "./CloneAndAtomicLayer",
+  "maintainers": [
+    {
+      "name": "johnyma22",
+      "email": "john@mclear.co.uk"
+    }
+  ],
+  "name": "ueberdb2",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pita/ueberDB.git"
+  },
+  "scripts": {},
+  "url": "https://github.com/Pita/ueberDB",
+  "version": "0.4.0"
+}

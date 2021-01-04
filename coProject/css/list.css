@@ -1,0 +1,86 @@
+
+
+.condition {
+    margin-right: 15px;
+}
+
+.listBtn {
+    background-color: #2bbbad;
+    color: #fff;
+    border: 0px;
+    width: 6rem;
+    height: 3.5rem;
+    box-shadow: 1px 1px 5px #ccc;
+}
+
+.listBtn:hover {
+    background-color: #079fa9;
+}
+
+.searchBox {
+    padding: 18px 0px;
+    margin: 12px 0px;
+    border-bottom: 1px solid #ddd;
+    margin-top: -43px;
+
+}
+
+.searchForm>div{
+    float: left;
+}
+
+.addBtnBox {
+    margin: 18px 0px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #ddd;
+}
+
+.boxBackground {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height:500px; 
+    background-color: #00000069;
+}
+
+.addInfoBox {
+    background-color: #fff;
+    width: 350px;
+    margin: 100px auto;
+    padding: 23px;
+    box-shadow: 0 0 5px #ddd;
+}
+
+hr{
+    margin: 10px 0px;
+}
+
+.BoxBody .form-group {
+    margin-bottom: 23px;
+}
+
+.BoxBody select {
+    width: 60%;
+}
+
+.errTips {
+    height: 2rem;
+    color: red;
+    text-align: center;
+}
+
+
+/* userDevice */
+
+.selectStyle:focus {
+    outline: -webkit-focus-ring-color auto 1px;
+}
+
+.delectIcon {
+    cursor: pointer;
+    float: right;
+}
+
+

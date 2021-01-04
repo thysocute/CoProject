@@ -1,0 +1,42 @@
+nav.navbar {
+	background-color: rgb(60, 60, 78);
+}
+
+nav .nav-wrapper {
+	height: 64px;
+}
+
+nav .container {
+	padding: 0px 50px;
+}
+
+.part-nav {
+	height: 64px;
+}
+
+.part-nav li {
+	line-height: 64px;
+}
+.part-nav  li:not(:last-child):hover {
+	background-color: #ccc;
+}
+
+nav ul li.active {
+	background-color: rgba(0,0,0,0.5);
+}
+
+.navbar .btn, .navbar .btn-group {
+	margin-top: 0px;
+	text-align: center;
+	
+}
+.navbar .btn, .navbar .btn-group:hover {
+	background-color: #2bbbad !important; 
+	background-position: 0 -35px;
+	color: #fff;
+}
+
+nav ul a:hover {
+	color: #fff;
+	text-decoration: none;
+}

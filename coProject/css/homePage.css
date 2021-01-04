@@ -1,0 +1,73 @@
+.bgBox {
+	position:fixed;   
+	min-width: 100%;    
+	min-height: 100%;    
+	width: auto;    
+	height: auto;    
+	top: 50%;    
+	left: 50%;    
+	transform: translateX(-50%) translateY(-50%);    
+	-webkit-transform: translateX(-50%) translateY(-50%);    
+	z-index: -100;
+	overflow: hidden;
+}
+
+.loginBox, .signBox {
+	width: 300px;
+	padding: 23px;
+	margin: auto;
+}
+
+.signBox {
+	margin-top: 20px;
+}
+
+.title {
+	text-align: center;
+}
+
+form {
+	margin-top: 44px;
+}
+
+.input-group {
+	margin-bottom: 23px;
+}
+
+
+.input-group-addon {
+	color: #2BBBAD;
+}
+
+.form-control {
+	height: 40px;
+	margin-top: 2px;
+}
+
+
+input[type="submit"].btn {
+	width: 284px;
+	background-color: #2BBBAD;
+	margin-top: 30px;
+}
+
+input[type="submit"].btn:hover {
+	color: #fff;
+	background-color: #27a598;
+}
+
+.linkBtn {
+	margin-top: 12px;
+}
+
+.linkBtn a{
+	color: #fff;
+}
+
+.linkBtn a:last-child{
+	float: right;
+}
+
+.linkBtn a:hover{
+	color: #2BBBAD;
+}

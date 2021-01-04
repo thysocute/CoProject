@@ -1,0 +1,526 @@
+$(function(){
+	$("#calendar").fullCalendar({
+		theme: true,
+		customButtons:{
+			button1:{
+				text:"新建",
+				click:function(){
+					// 日期面板
+					$(".datepicker").datepicker({
+						language:"zh-CN",
+						format:"yyyy-mm-dd",
+						todayHighlight:true,
+						autoclose:true,
+						weekStart:0
+					});
+					// 时间面板
+					$(".timepicki").wickedpicker({
+						title:'',
+						showSeconds:true,
+						twentyFour:true
+					});
+					// 是否选择全天 选择值为1 不选择则显示开始时间和结束时间输入框
+					$("#isallday").click(function(){
+						if($("#isallday").prop("checked") == true){
+							$("#isallday").val("1");
+							$("#starttime,#endtime").hide();
+						}else{
+							$("#isallday").val("0");
+							$("#starttime,#endtime").show();
+						};	
+					});
+					// 是否选择结束时间
+					$("#end").click(function(){
+						if($("#end").prop("checked") == true){
+							$("#enddate").show();
+						}else{
+							$("#enddate").hide();
+						};
+					});
+					// 是否选择重复 重复类型 重复时间
+					$("#repeat").click(function(){
+						if($("#repeat").prop("checked") == true){
+							$("#repeattype,#repeattime").show();
+						}else{
+							$("#repeattype,#repeattime").hide();
+						};
+					});
+					// 重复添加附加项
+					$("#repeatselect").change(function(){
+						switch($("#repeatselect").val()){
+							case "1":
+								$("#repeatclock").show();
+								$("#repeatmonth,#repeatweek,#repeatday").hide();
+								break;
+							case "2":
+								$("#repeatmonth,#repeatday").hide();
+								$("#repeatweek,#repeatclock").show();
+								break;
+							case "3":
+								$("#repeatmonth,#repeatweek").hide();
+								$("#repeatday,#repeatclock").show();
+								break;
+							case "4":
+								$("#repeatweek").hide();
+								$("#repeatmonth,#repeatday,#repeatclock").show();
+							break;
+							case "5":
+							$("#repeatclock").show();
+								$("#repeatmonth,#repeatweek,#repeatday").hide();
+								break;
+						}
+					});
+					// 对话框
+					dialog({
+						title:"新建日程",
+						content:$("#dialog-form"),
+						okValue:"确定", 
+						ok:function(){
+							var title = $("#title").val();
+							var description = $("#description").val();
+							var startdate = $("#startdate").val();
+							var starttime = $("#starttime").val().split(" ").join("");
+							var enddate = $("#stopdate").val();
+							var endtime = $("#endtime").val().split(" ").join("");
+							var allDay = $("#isallday").val();
+							console.log("看这里"+allDay);
+							var remark = $('#remark option:selected').val();//选中的值
+							if(title){
+								$.ajax({
+									url:'../php/addCalendarEvents.php',
+			   						data:{title:title,description:description,sdate:startdate,stime:starttime,edate:enddate,etime:endtime,allDay:allDay,remark:remark},
+			   						type:'POST',
+			   						dataType:'json',
+			  						success:function(data){
+			  							console.log(data);
+			  							console.log("新建");
+			  							// 刷新当前文档
+			  							// location.reload();
+			  							// 从各个数据源重新获取并且渲染数据：
+			  							$('#calendar').fullCalendar('refetchEvents');
+			  							/* .fullCalendar( 'renderEvent', event [, stick ] ) 
+			  							 * 渲染一个新的日程事件到日程表上 
+			  							 * event是 Event Object 对象，至少含有 title 和 start 属性
+			  							 * */
+			  							// $("#calendar").fullCalendar("renderEvent",data,true);
+			  						},
+			  						error:function(){
+			  							alert("Failed");
+			  						}
+			   						
+								});
+							};
+						},
+						cancelValue:"关闭",
+						cancel:function(){
+							//$("#ui-datepicker-div").remove();
+						}
+					}).showModal();
+				}
+			},
+			button2:{
+				text:"查询",
+				click:function(){
+					$(".datepicker").datepicker({
+						language:"zh-CN",
+						format:"yyyy-mm-dd",
+						todayHighlight:true,
+						autoclose:true,
+						weekStart:0
+					});
+					dialog({
+						title:"查询",
+						content:$("#search"),
+						okValue:"查询",
+						ok:function(){
+							// todo
+							$("#ui-datepicker-div").remove();
+						},
+						button:[{
+							value:"打印"
+						}],
+						cancelValue:"返回",
+						cancel:function(){
+							$("#ui-datepicker-div").remove();
+						}
+					}).showModal();
+
+				}
+			},
+			button3:{
+				text:"设置",
+				click:function(){
+					$("#slider").slider({
+						range:true,
+						min:0,
+						max:24,
+						values:[8,18],
+						slide: function( event, ui ) {
+			        		$( "#amount" ).val(ui.values[ 0 ] + ":00 - " + ui.values[ 1 ]+":00");
+			        		
+			      		}
+					});
+					$( "#amount" ).val($( "#slider" ).slider( "values", 0 ) +
+  ":00 - " + $( "#slider" ).slider( "values", 1 )+":00");
+					dialog({
+						title:"设置时间段",
+						content:$("#set"),
+						okValue:"确定",
+						ok:function(){
+							var minTime = $( "#slider" ).slider( "values", 0 )+":00:00";
+			      			var maxTime = $( "#slider" ).slider( "values", 1 )+":00:00";
+			      			$("#calendar").fullCalendar("option","minTime",minTime);
+			      			$("#calendar").fullCalendar("option","maxTime",maxTime);
+						},
+						cancelValue:"关闭",
+						cancel:function(){}
+					}).showModal();
+				}
+			}
+		},
+		header: {
+			left: 'prev,next today button3',
+			center: 'title',
+			right: 'button1 button2 month,agendaWeek,agendaDay,listMonth'
+		},
+		firstDay: 1,
+		monthNames: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+		monthNamesShort: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+		dayNames:["星期日","星期一","星期二","星期三","星期四","星期五","星期六"],
+		dayNamesShort:["日","一","二","三","四","五","六"],
+		buttonText:{
+			today: "今天",
+			month: "月",
+			week: "周",
+			day: "天",
+			listMonth:"列表"
+		},
+		allDayDefault:false,
+		slotLabelFormat:"H",
+		businessHours: {
+			dow:[1,2,3,4,5],
+			start:"8:00",
+			end:"17:00"
+		},
+		allDaySlot: true,
+		allDayText: "全天",
+		timeFormat: "HH:mm",//设置的是添加的具体的日程上显示的时间
+		views:{
+			month:{
+				titleFormat:"YYYY年M月"
+			},
+			week:{
+				titleFormat:"YYYY年M月D日",
+				columnFormat:"M.D dddd"
+			},
+			day:{
+				titleFormat:"YYYY年M月D日 dddd",
+				columnFormat:"M/D dddd"
+			}
+		},
+		eventSources: [
+	        {
+	          	url: '../php/getCalendarEvents.php',
+	          success: function(data) {
+	            console.log(data);
+	            console.log("fetch succesful (./getCalendarEvents.php) success");
+	          },
+	          error: function(XMLHttpRequest, textStatus, errorThrown) {
+	            console.log("fetch unsuccessful (./getCalendarEvents.php) noload");
+	          }
+	        }
+	    ], // End of event sources
+		dayClick: function(date,allDay,jsEvent,view){
+			var selDate = $.fullCalendar.formatDate(date,"YYYY-MM-DD");
+			var d = dialog({
+				title:"新建事件",
+				content:"<textarea rows=5 class='taxt' placeholder='内容' id='eventall'></textarea><p>"+selDate+"</p>",
+				width:460,
+				button:[{
+					value:"完整编辑",
+					callback:function(){
+						$(".datepicker").datepicker({
+							language:"zh-CN",
+							format:"yyyy-mm-dd",
+							todayHighlight:true,
+							autoclose:true,
+							weekStart:0
+						});
+						$(".timepicki").wickedpicker({
+							title:'',
+							showSeconds:true,
+							twentyFour:true
+						});
+						$("#isallday").click(function(){
+							if($("#isallday").prop("checked") == true){
+								$("#isallday").val("1");
+								$("#starttime,#endtime").hide();
+							}else{
+								$("#isallday").val("0");
+								$("#starttime,#endtime").show();
+							};	
+						});
+						$("#end").click(function(){
+							if($("#end").prop("checked") == true){
+								$("#enddate").show();
+							}else{
+								$("#enddate").hide();
+							};
+						});
+						$("#repeat").click(function(){
+							if($("#repeat").prop("checked") == true){
+								$("#repeattype,#repeattime").show();
+							}else{
+								$("#repeattype,#repeattime").hide();
+							};
+						});
+						$("#repeatselect").change(function(){
+							switch($("#repeatselect").val()){
+								case "1":
+									$("#repeatclock").show();
+									$("#repeatmonth,#repeatweek,#repeatday").hide();
+									break;
+								case "2":
+									$("#repeatmonth,#repeatday").hide();
+									$("#repeatweek,#repeatclock").show();
+									break;
+								case "3":
+									$("#repeatmonth,#repeatweek").hide();
+									$("#repeatday,#repeatclock").show();
+									break;
+								case "4":
+									$("#repeatweek").hide();
+									$("#repeatmonth,#repeatday,#repeatclock").show();
+									break;
+								case "5":
+									$("#repeatclock").show();
+									$("#repeatmonth,#repeatweek,#repeatday").hide();
+									break;
+							}
+						});
+						dialog({
+							title:"新建日程",
+							content:$("#dialog-form"),
+							okValue:"确定",
+							ok:function(){
+								var title = $("#title").val();
+								var description = $("#description").val();
+								var startdate = $("#startdate").val();
+								var starttime = $("#starttime").val().split(" ").join("");
+								var enddate = $("#stopdate").val();
+								var endtime = $("#endtime").val().split(" ").join("");
+								var allDay = $("#isallday").val();
+								var remark = $('#remark option:selected').val();//选中的值
+								if(title){
+									$.ajax({
+										url:'../php/addCalendarEvents.php',
+				   						data:{title:title,description:description,sdate:startdate,stime:starttime,edate:enddate,etime:endtime,allDay:allDay,remark:remark},
+				   						type:'POST',
+				   						dataType:'json',
+				  						success:function(data){
+				  							// console.log(data)
+				  							// location.reload();
+				  							$('#calendar').fullCalendar('refetchEvents');
+				  							// $("#calendar").fullCalendar("renderEvent",data,true);
+				  						},
+				  						error:function(){
+				  							alert("Failed");
+				  						}
+				   						
+									});
+								};
+							},
+							cancelValue:"关闭",
+							cancel:function(){}
+						}).showModal();
+					},	
+				}],
+				okValue:"确定",
+				ok:function(){
+					var titleall = $("#eventall").val();
+					if(titleall){
+						$.ajax({
+							url:'../php/addHalfEvents.php',
+	   						data:{title:titleall, start:selDate},
+	   						type:'POST',
+	   						dataType:'json',
+	  						success:function(data){
+	  							// location.reload();
+			  					$('#calendar').fullCalendar('refetchEvents');
+	  							// $("#calendar").fullCalendar("renderEvent",data,true);
+	  						},
+	  						error:function(){
+	  							alert("Failed");
+	  						}
+	   						
+						});
+					};
+				},
+				cancelValue:"取消",
+				cancel:function(){}
+			});
+			d.showModal();
+			
+		},
+		eventClick:function(event,jsEvent,view){
+			// 全局变量 点击事件的id
+			globalClickedEvent = event.id;
+
+			var editstarttime = $.fullCalendar.formatDate(event.start,"YYYY-MM-DD HH:mm:ss");
+			$("#edittitle").html(event.title);
+			var eventtitle = event.title;
+			if(event.end){
+				var editendtime = $.fullCalendar.formatDate(event.end,"YYYY-MM-DD HH:mm:ss");
+				$("#edittime").html(editstarttime+"  至  "+editendtime);
+			}else{
+				$("#edittime").html(editstarttime);
+			};
+			// var time = '19:00:00';
+			dialog({ // 更新
+				title:"编辑日程",
+				content:$("#edit"),
+				okValue:"编辑",
+				ok:function(){
+					$(".datepicker").datepicker({
+						language:"zh-CN",
+						format:"yyyy-mm-dd",
+						todayHighlight:true,
+						autoclose:true,
+						weekStart:0
+					});
+					$(".timepicki").wickedpicker({
+						// now: time,
+						title:'',
+						showSeconds:true,
+						twentyFour:true
+					});
+					$("#isallday").click(function(){
+						if($("#isallday").prop("checked") == true){
+							$("#isallday").val("1");
+							$("#starttime,#endtime").hide();
+						}else{
+							$("#isallday").val("0");
+							$("#starttime,#endtime").show();
+						};	
+					});
+					$("#end").click(function(){
+						if($("#end").prop("checked") == true){
+							$("#enddate").show();
+						}else{
+							$("#enddate").hide();
+						};
+					});
+					$("#repeat").click(function(){
+						if($("#repeat").prop("checked") == true){
+							$("#repeattype,#repeattime").show();
+						}else{
+							$("#repeattype,#repeattime").hide();
+						};
+					});
+					$("#repeatselect").change(function(){
+						switch($("#repeatselect").val()){
+							case "1":
+								$("#repeatclock").show();
+								$("#repeatmonth,#repeatweek,#repeatday").hide();
+								break;
+							case "2":
+								$("#repeatmonth,#repeatday").hide();
+								$("#repeatweek,#repeatclock").show();
+								break;
+							case "3":
+								$("#repeatmonth,#repeatweek").hide();
+								$("#repeatday,#repeatclock").show();
+								break;
+							case "4":
+								$("#repeatweek").hide();
+								$("#repeatmonth,#repeatday,#repeatclock").show();
+								break;
+							case "5":
+								$("#repeatclock").show();
+								$("#repeatmonth,#repeatweek,#repeatday").hide();
+								break;
+						}
+					});
+					dialog({
+						title:"新建日程",
+						content:$("#dialog-form"),
+						okValue:"确定",
+						ok:function(){
+							var title = $("#title").val();
+							var description = $("#description").val();
+							var startdate = $("#startdate").val();
+							var starttime = $("#starttime").val().split(" ").join("");
+							var enddate = $("#stopdate").val();
+							var endtime = $("#endtime").val().split(" ").join("");
+							var allDay = $("#isallday").val();
+							var remark = $('#remark option:selected').val();//选中的值
+							if(title){
+								$.ajax({
+									url:'../php/addCalendarEvents.php',
+			   						data:{title:title,description:description,sdate:startdate,stime:starttime,edate:enddate,etime:endtime,allDay:allDay,remark:remark},
+			   						type:'POST',
+			   						dataType:'json',
+			  						success:function(data){
+			  							// console.log(data);
+			  							// location.reload();
+			  							$('#calendar').fullCalendar('refetchEvents');
+			  							// $("#calendar").fullCalendar("renderEvent",data,true);
+			  						},
+			  						error:function(){
+			  							alert("Failed");
+			  						}
+			   						
+								});
+							};
+						},
+						cancelValue:"关闭",
+						cancel:function(){
+							// location.reload();
+			  				$('#calendar').fullCalendar('refetchEvents');
+						}
+					}).showModal();
+					$("#calendar").fullCalendar("removeEvents",function(event){
+						// globalClickedEvent 事件ID
+						if(event.title==eventtitle){
+							return true;
+						}else{
+							return false;
+						}
+					});
+				},
+				button:[{
+					value:"删除",
+					callback:function(){
+						$.ajax({
+							url:'../php/deleteCalendarEvents.php',
+	   						data:{id: globalClickedEvent},
+	   						type:'POST',
+	   						dataType:'json',
+	  						success:function(data){
+	  							// console.log(data);
+	  							// location.reload();
+	  							$('#calendar').fullCalendar('refetchEvents');
+	  							// $("#calendar").fullCalendar("renderEvent",data,true);
+	  						},
+	  						error:function(){
+	  							alert("Failed");
+	  						}
+	   						
+						});
+					}
+				}],
+				cancelValue:"取消",
+				cancel:function(){
+					// location.reload();
+			  		$('#calendar').fullCalendar('refetchEvents');
+				}
+			}).showModal();
+		}
+	
+	});
+
+
+
+
+});
+

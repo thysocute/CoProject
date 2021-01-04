@@ -1,0 +1,88 @@
+<?php
+/* Called by addTak.php
+ * Summary: This file queries the database for the pro_name.
+ * If the query is successful, the page is redirected to TaskList.php.
+ * Otherwise the page is redirected to createTak.php.
+ */
+session_start();
+require_once '../includes/databaseConnection.php';
+
+// 如果提交内容不为空
+if (!empty($_POST)) {
+    $teamCode = $_POST['teamCode'];     // 团队邀请码
+
+   
+    if (empty($teamCode)) {
+        echo "请填写团队加入邀请码！";
+        exit();
+    } else {
+
+        /* 表user_team 表team
+         * 通过邀请码teamCode查询team_id
+         * 通过team_id查询表user_team中user_id是否存在
+         * 若存在 弹出提示框提示该用户已经加入团队中
+         * 若不存在则将team_id 和 user_id插入表user_team
+         * 2020.4.11
+         */
+        // team_id
+        $sql = "SELECT team_id FROM team WHERE team_code= '".$teamCode."'";
+        $teamId = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC)["team_id"];
+
+        // 查询user_id
+        $sql = "SELECT user_id FROM users WHERE account= '".$_SESSION["account"]."'";
+        $userId = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC)["user_id"];
+        // 
+        $sql = "SELECT COUNT(*) FROM user_team WHERE team_id = $teamId AND user_id = $userId";
+        $result = $pdo->prepare($sql);
+        $result->execute();
+        $accountExists = $result->fetchColumn();
+
+        if ($accountExists > 0) {
+            print "<script language=\"JavaScript\">\r\n";
+            print " location.replace(\"../static/myTeamList.php\");\r\n"; // 自己修改网址
+            print " alert(\"您已经加入该团队！\");\r\n";
+            print "</script>";
+            exit();
+        } else {
+            // 插入数据
+            try {
+                $pdo->beginTransaction();
+                // project表
+                $sql = "INSERT INTO user_team(user_id, team_id) 
+                        VALUES(:userId, :teamId);";
+                $statement = $pdo->prepare($sql);
+                $statement->bindParam(":userId", $userId);
+                $statement->bindParam(":teamId", $teamId);
+                $statement->execute();
+
+               /* $teamId = $pdo->lastInsertId();
+
+                // 用户id
+                $sql = "SELECT user_id FROM users WHERE account= '".$_SESSION["account"]."'";
+                $uId = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC)["user_id"];
+
+                // user_pro表
+                $statement = $pdo->prepare("INSERT INTO user_team(team_id, user_id) VALUES(:teamId, :uId);");
+                $statement->bindParam(":teamId", $teamId);
+                $statement->bindParam(":uId", $uId);
+                $statement->execute();*/
+
+                // 提交事务
+                $pdo->commit();
+
+                // header() 函数向客户端发送原始的 HTTP 报头。
+                // header('Location: ../static/myTeamList.php');
+                print "<script language=\"JavaScript\">\r\n";
+                print " alert(\"成功加入团队！\");\r\n";
+                print " location.replace(\"../static/myTeamList.php\");\r\n"; // 自己修改网址
+                print "</script>";
+
+                exit();
+            } catch (PDOException $e) {
+                $pdo->rollback();
+                echo "Error $e";
+            }
+        }
+    }
+}
+?>

@@ -1,0 +1,122 @@
+<?php
+    /*
+     * Documentation for getCalendarEvents.php
+    */
+    session_start();
+
+    require_once('../includes/databaseConnection.php'); //Make the connection to the database
+    require_once('../php/fullCalendarUtil.php'); //Includes the Event class and the datetime utilities (provided by FullCalendar.io)
+
+   
+    //Short-circuit if the client did not give us a date range.
+    if (!isset($_GET['start']) || !isset($_GET['end'])) {
+        die("Please provide a date range.");
+    }
+
+    // Parse the start/end parameters.
+    // These are assumed to be ISO8601 strings with no time nor timezone, like "2013-12-29".
+    // Since no timezone will be present, they will parsed as UTC.
+    $range_start = parseDateTime($_GET['start']);
+    $range_end = parseDateTime($_GET['end']);
+
+    //Set the $_SESSION parameters for the side bar in calendar.php
+    // $_SESSION['start'] = $_GET['start'];
+    // $_SESSION['end'] = $_GET['end'];
+
+    /* Test start and end ranges */
+    // $range_start = parseDateTime("2018-04-01");
+    // $range_end = parseDateTime("2018-04-30");
+    // $_SESSION['username'] = 'user1';
+
+    // Parse the timezone parameter if it is present.
+    $timezone = null;
+    if (isset($_GET['timezone'])) {
+        $timezone = new DateTimeZone($_GET['timezone']);
+    }
+
+    // ******忽略了刚加入的用户没有群组***  2020.4.15未完成
+
+    /* 先查询该用户是否有团队，没有的话直接显示该用户的日历事件，若是有
+     * 获取用户自己的日历事件和所有组员的日历事件    
+     * '$_SESSION["uid"]-->user_id
+     * 通过user_id从表user_team获得team_id
+     * 通过team_id从表user_team获得user_id组
+     * 通过user_id从表calendar_rights获得calendar_id
+     * 通过calendar_id从表calendar_events获得日历事件
+     */
+    
+    $sql = "SELECT COUNT(*) FROM user_team WHERE user_id = '".$_SESSION["uid"]."'";
+    $tAccount = $pdo->prepare($sql);
+    $tAccount->execute();
+    $accountExists = $tAccount->fetchColumn();
+
+    if($accountExists == 0) {
+        $sql = "SELECT user_id FROM users WHERE account= '".$_SESSION["account"]."'";
+        try {
+            $userIds = $pdo->query($sql); // user_id组
+        } catch (PDOException $e) {
+            echo "Error (./getCalendarEvents.php [infile]): $e";
+        }
+    } else {
+        $sql = "SELECT DISTINCT user_id FROM user_team WHERE team_id IN (SELECT team_id FROM user_team WHERE user_id= '".$_SESSION["uid"]."')";
+
+        try {
+            $userIds = $pdo->query($sql); // user_id组
+        } catch (PDOException $e) {
+            echo "Error (./getCalendarEvents.php [infile]): $e";
+        }
+    }
+    
+    // 查询user_id
+   /* $sql = "SELECT DISTINCT user_id FROM user_team WHERE team_id IN (SELECT team_id FROM user_team WHERE user_id= '".$_SESSION["uid"]."')";
+
+    try {
+        $userIds = $pdo->query($sql); // user_id组
+    } catch (PDOException $e) {
+        echo "Error (./getCalendarEvents.php [infile]): $e";
+    }*/
+
+    $all_events = array(); //Holds all the events for the user
+    $results = array();
+
+    while ($singleUser = $userIds->fetch()) {
+        $sql = "SELECT * FROM calendar_events WHERE calendar_id IN (SELECT calendar_id FROM calendar_rights WHERE user_id= '".$singleUser['user_id']."')";
+
+        try {
+            $allEvents = $pdo->query($sql);
+        } catch (PDOException $e) {
+            echo "Error (./getCalendarEvents.php [infile]): $e";
+        }
+
+        while ($row = $allEvents->fetch()) {
+            $results[] = array(
+                    "id"            => $row['event_id'],
+                    "title"         => $row['title'],
+                    "description"   => $row['description'],
+                    "start"         => $row['start_date'],
+                    "end"           => $row['end_date'],
+                    "allDay"        => $row['all_day'],
+                    "color"         => $row['color'],
+                    "remark"        => $row['remark']
+            );
+        }
+    }
+    
+    // Accumulate an output array of event data arrays.
+    $output_arrays = array();
+    foreach ($results as $array) {
+        //Convert the input array into a useful Event object
+        $event = new Event($array, $timezone);
+
+        //If the event is in-bounds, add it to the output
+        //
+        //isWithinDayRange 不知道那里有问题
+        // if ($event->isWithinDayRange($range_start, $range_end)) {
+            $output_arrays[] = $event->toArray();
+        // }
+    }
+    /* Step 5:  Send JSON to the client */
+    echo json_encode($output_arrays);
+    // echo json_encode($results);
+    // echo "www";
+?>

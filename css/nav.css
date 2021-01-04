@@ -1,0 +1,151 @@
+/*header{
+	z-index: 9999;
+}
+*/
+a.brand-logo:hover {
+	background-color: transparent;
+}
+
+nav.navbar {
+	/*background-color: rgb(60, 60, 78);*/
+	background-color: #727679;
+	/*background-color: #000;*/
+}
+
+nav .nav-wrapper {
+	height: 64px;
+}
+
+nav .container {
+	padding: 0px 50px;
+}
+
+.part-nav {
+	height: 64px;
+	padding-top: 10px;
+	text-align: right;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+.part-nav li {
+	line-height: 64px;
+	float: right;
+}
+
+
+.navbar .nav>li>a {
+    color: #fff;
+    text-shadow: none;
+}
+
+.navbar .nav>li>a:hover {
+	color: #000;
+}
+
+nav .nav>li.active>a {
+	color: #000;
+}
+
+
+.mobile-nav-box {
+	width: 50px;
+	height: 30px;
+	position: absolute;
+	top: 0px;
+	right: 20px;
+	background: #fff;
+}
+
+/*logo css*/
+.menu-logo {
+	display: none;
+	width: 45px;
+	height: 45px;
+	background-image: url(../img/menu_logo.png);
+	background-repeat: no-repeat;
+	position: absolute;
+    right: 5px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.menu-angle {
+	/*display: none;*/
+	width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 15px solid #2bbbad;
+    position: absolute;
+    right: 25px;
+    top: -5px;
+}
+
+.menu {
+	display: none;
+	z-index: 999;
+	position: relative;
+}
+
+.mobile-menu {
+	/*display: none;*/
+	width: 10em;
+	position: absolute;
+	right: -35px;
+	top: 10px;
+	box-shadow: 0px 2px 4px #ddd;
+	background-color: #fff;
+	/*border: 1px solid #2bbbad;*/
+	border-top: 12px solid #2bbbad;
+}
+
+.mobile-menu li {
+	width: 100%;
+	text-align: center;
+	background-color: #fff;
+}
+
+.mobile-menu li:hover {
+	background-color: rgba(0,0,0,0.1);
+}
+
+.mobile-menu li.active {
+	background-color: #2bbbad;
+}
+
+
+.mobile-menu li a {
+	display: inline-block;
+	width: 100%;
+	height:100%;
+	color: #000;
+	line-height: 35px;
+
+}
+
+.mobile-menu li:hover>a {
+	background-color: transparent;
+}
+
+/*nav css*/
+@media only screen and (max-width: 992px){
+	.menu-logo {
+		display: inline-block;
+	}
+
+	.part-nav {
+		display: none;
+	}
+
+	/*.mobile-menu {
+		display: block;
+	}
+
+	.menu-angle {
+		display: inline-block;
+	}*/
+}
+

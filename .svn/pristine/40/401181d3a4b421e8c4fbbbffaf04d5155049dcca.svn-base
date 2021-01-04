@@ -1,0 +1,91 @@
+.clearfix:after { 
+    content:"\200B"; 
+    display:block; 
+    height:0; 
+    clear:both; 
+} 
+
+.setRandLayout {
+    display: none;
+    z-index: 555;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(0,0,0, 0.7);
+}
+.randBox {
+	width: 450px;
+    position: absolute;
+    z-index: 9999;
+    left: 50%;
+    top: 200px;
+    margin-left: -230px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #ddd;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+.rHead {
+	height: 35px;
+	border-bottom: 1px solid #ddd;
+}
+
+.rBody {
+	padding-top: 13px;
+}
+.tips {
+	font-size: 12px;
+    color: #ad0404; 
+}
+
+.eventList {
+	margin-top: 8px;
+	padding-left: 50px;
+	min-height: 50px;
+}
+
+.eventItem {
+	border: 1px solid #eee;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.levelBox {
+	float: left;
+	width: 50px;
+}
+.levelBox span{
+	height: 50px;
+    display: inline-block;
+    line-height: 50px;
+    font-weight: bold;
+}
+.dropBox {
+	float: left;
+	width: 370px;
+	min-height: 150px;
+	border: 1px solid #ddd;
+}
+.dropBox li {
+	width: 365px;
+	height: 60px;
+	border: 1px solid #ddd;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+hr {
+	margin: 5px;
+}
+
+.footBar button{
+	width: 80px;
+    height: 35px;
+    color: #ffffff;
+    background-color: #428bca;
+    border-color: #357ebd;
+    float: right;
+    margin-right: 12px;
+}
